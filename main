@@ -1,0 +1,112 @@
+#include<iostream>
+using namespace std;
+
+class Node
+{
+public:
+	int generation;
+	string name;
+	class Node* left;
+	class Node* right;
+	class Node* left2;
+	class Node* right2;
+	Node(int gen, string n);
+	void print();
+};
+class Node2
+{
+public:
+	int generation;
+	string name;
+	class Node2* left;
+	class Node2* right;
+	class Node2* left2;
+	class Node2* right2;
+	Node2(int gen, string n);
+	void print();
+};
+void printTree(class Node* node);
+void printTree2(class Node2* node2);
+int main() {
+	cout << "hello data structures!" << endl;
+	cout << "Mom's side:" << endl;
+	Node* root = new Node(0, "Maria"); // grandma
+
+	root->left2 = new Node(1, "Dalia");//Auntie #1
+	root->left = new Node(1, "Jenny");//Mom
+	root->right = new Node(1, "Jacqueline");//Auntie #2
+	root->right2 = new Node(1, "Chris");//uncle
+
+	root->left2->left = new Node(2, "Hector");//cousin #1
+
+	root->left->left2 = new Node(2, "Isaiah");//ME
+	root->left->left = new Node(2, "Serenity");//Lil Sis
+	root->left->right = new Node(2, "Sebastien");//Lil Bro
+
+	root->right->left = new Node(2, "Noah");//cousin #2
+
+	printTree(root);
+	cout<<endl;
+	cout << "Dad's side:" << endl;
+	Node2* root2 = new Node2(0, "Rudie");//Grandpa
+
+	root2->left2 = new Node2(1, "Teresa");//Auntie #1
+	root2->left = new Node2(1, "Julie");//Auntie #2
+	root2->right = new Node2(1, "David");//Dad
+	root2->right2 = new Node2(1, "Mark");//uncle
+
+	root2->left2->left2 = new Node2(2, "Unknown Child 1");//cousin
+	root2->left2->left = new Node2(2, "Unknown Child 2");//cousin
+	root2->left2->right = new Node2(2, "Unknown Child 3");//cousin
+
+	root2->left->left2 = new Node2(2, "Reina");//cousin
+
+	root2->right->left2 = new Node2(2, "Hillary");//Elder Sister
+	root2->right->left = new Node2(2, "Danessa");//Older sister
+	root2->right->right = new Node2(2, "Isaiah");//Me
+
+	root2->right->left2->left2 = new Node2(3, "Talia");//Niece
+	root2->right->left2->left = new Node2(3, "Alia");//Niece
+	root2->right->left2->right = new Node2(3, "Unknown son I haven't met");//Nephew
+
+	
+	printTree2(root2);
+}
+
+Node::Node(int gen, string n) {
+	generation = gen;
+	name = n;
+}
+Node2::Node2(int gen, string n) {
+	generation = gen;
+	name = n;
+}
+
+void Node::print() {
+	cout << "Hi my name is " << name << " and I am generation " << generation << "." << endl;
+}
+void Node2::print() {
+	cout << "Hi my name is " << name << " and I am generation " << generation << "." << endl;
+}
+void printTree(class Node* node) {
+	if (node == NULL)
+		return;
+
+	cout << "Hello, I'm " << node->name << " and I am generation " << node->generation << "." << endl;
+
+	printTree(node->left2);
+	printTree(node->left);
+	printTree(node->right);
+	printTree(node->right2);
+}
+void printTree2(class Node2* node2) {
+	if (node2 == NULL)
+		return;
+
+	cout << "Hello, I'm " << node2->name << " and I am generation " << node2->generation << "." << endl;
+
+	printTree2(node2->left2);
+	printTree2(node2->left);
+	printTree2(node2->right);
+	printTree2(node2->right2);
+}
